@@ -8,8 +8,9 @@
     <link rel="stylesheet" href="./css/main.css">
     <script id="movie-template" type="text/x-handlebars-template">
       <li>
+        <img src="{{poster_path}}" alt="Poster img">
         <h1 class='title'>{{title}}</h1>
-        <h2 class="original_title">original title: {{original_title}}</h2>
+        <h2 class="original_title">Original title: {{original_title}}</h2>
         <span class="original_language"><div class='{{original_language}}'></div></span><br>
         <span class="vote_average"><i class="1 fas fa-star"></i><i class="2 fas fa-star"></i><i class="3 fas fa-star"></i><i class="4 fas fa-star"></i><i class="5 fas fa-star"></i></span>
       </li>
@@ -17,13 +18,20 @@
   </head>
   <body>
 
-    <div id="Serch">
-      <input id="serchInput" type="text" placeholder="Serch">
-      <button id="btnSerch" type="button" name="button">Serch</button>
-    </div>
+    <header>
+      <div class="logoBoolFlix">
+        <h1>BOOLFLIX</h1>
+      </div>
+      <div id="serch">
+        <input id="serchInput" type="text" placeholder="Serch">
+      </div>
+    </header>
 
-    <ol id="containerMovies">
-    </ol>
+    <main>
+      <ul id="containerMovies">
+      </ul>
+    </main>
+
 
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
