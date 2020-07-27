@@ -7,6 +7,12 @@
     <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
     <link rel="stylesheet" href="./css/main.css">
     <script id="movie-template" type="text/x-handlebars-template">
+      <li>
+        <h1 class='title'>{{title}}</h1>
+        <h2 class="original_title">original title:{{original_title}}</h2>
+        <span class="original_language">Original language:{{original_language}}</span> <br>
+        <span class="vote_average">Vote:{{vote_average}}</span>
+      </li>
     </script>
   </head>
   <body>
@@ -15,6 +21,9 @@
       <input id="serchInput" type="text" placeholder="Serch">
       <button id="btnSerch" type="button" name="button">Serch</button>
     </div>
+
+    <ol id="containerMovies">
+    </ol>
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="js/jscript.js" charset="utf-8"></script>

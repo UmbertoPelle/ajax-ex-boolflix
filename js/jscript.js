@@ -4,6 +4,7 @@ function findMovie() {
   var input = $('#serchInput');
 
   btn.click(function () {
+    $('#containerMovies').text('');
     var request = input.val();
 
     $.ajax({
@@ -12,17 +13,35 @@ function findMovie() {
       data:{
         'api_key':apiKey,
         'query':request,
-        'language': 'it_IT'
+        'language': 'it-IT'
       },
       success : function (data) {
         var arrayMovie = data['results'];
         console.log(arrayMovie);
+        printMovie(arrayMovie);
       },
       error : function (err) {
         console.log(err,"error");
       }
     });
   });
+}
+
+function printMovie(arrayMovie) {
+  var template = $('#movie-template').html();
+  var compiled = Handlebars.compile(template)
+  var target = $('#containerMovies');
+
+  for (var i = 0; i < arrayMovie.length; i++) {
+    var movie = arrayMovie[i];
+    var movieHtml= compiled({
+      'title':movie['title'],
+      'original_title':movie['original_title'],
+      'original_language':movie['original_language'],
+      'vote_average':movie['vote_average']
+    });
+    target.append(movieHtml);
+  }
 }
 
 
