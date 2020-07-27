@@ -49,7 +49,8 @@ function printMovie(arrayMovie) {
       'title':movie['title'],
       'original_title':movie['original_title'],
       'original_language':movie['original_language'],
-      'poster_path': poster + movie['poster_path']
+      'poster_path': poster + movie['poster_path'],
+      'overview':movie['overview']
     });
     target.append(movieHtml);
 
@@ -79,7 +80,7 @@ function findSerie() {
       if (data['total_results'] >0) {
         printSeries(arraySeries);
       }else {
-        $('#containerMovies').text('NESSUN CONTENUTO TROVATO');
+        $('#containerMovies').html('<h1 class="error">NESSUN CONTENUTO TROVATO </h1>');
       }
 
 
@@ -105,7 +106,8 @@ function printSeries(arraySeries) {
       'title':series['name'],
       'original_title':series['original_name'],
       'original_language':series['original_language'],
-      'poster_path': poster + series['poster_path']
+      'poster_path': poster + series['poster_path'],
+      'overview':series['overview']
     });
     target.append(seriesHtml);
     for (var x = 0; x <= vote; x++) {

@@ -1,5 +1,5 @@
 body{
-  background: #bfbaba;
+  background: #373737;
 }
 
 header{
@@ -13,6 +13,7 @@ header{
   align-items:center;
   background: #000;
   text-align: center;
+  z-index: 100;
 }
 
 header h1{
@@ -33,8 +34,8 @@ header h1{
   margin: 10px 20px;
   border: solid 1px #fff;
   min-width: calc(100% / 4);
-  height: 860px;
   text-align: center;
+  min-height: 300px;
 }
 
 #containerMovies li h2{
@@ -71,4 +72,26 @@ header h1{
 
 .es{
   background-image:url('../img/es.png');
+}
+
+.container{
+  position: relative;
+}
+
+.details{
+  display: none;
+  background-color: #000;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  color: #fff;
+}
+
+.container:hover .details{
+  display: block;
+}
+
+.error{
+  color:red;
 }
