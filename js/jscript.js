@@ -21,7 +21,27 @@ function findMovie() {
             if (data['total_results'] >0) {
               printMovie(arrayMovie);
             }else {
-              findSerie();
+              $.ajax({
+                url:'https://api.themoviedb.org/3/search/tv',
+                method:'GET',
+                data:{
+                  'api_key':apiKey,
+                  'query':request,
+                  'language': 'it-IT'
+                },
+                success : function (data) {
+                  var arraySeries = data['results'];
+                  if (data['total_results'] >0) {
+                    printSeries(arraySeries);
+                  }else {
+                    $('#containerMovies').html('<h1 class="error">NESSUN CONTENUTO TROVATO </h1>');
+                  }
+                },
+                error : function (err) {
+                  console.log(err,"error");
+                }
+
+              });
             }
           },
           error : function (err) {
@@ -59,37 +79,6 @@ function printMovie(arrayMovie) {
     }
 
   }
-}
-
-function findSerie() {
-  var input = $('#serchInput');
-  var apiKey = 'dc2cea832b9cc2420fe1b945e738abdf';
-  $('#containerMovies').text('');
-  var request = input.val();
-
-  $.ajax({
-    url:'https://api.themoviedb.org/3/search/tv',
-    method:'GET',
-    data:{
-      'api_key':apiKey,
-      'query':request,
-      'language': 'it-IT'
-    },
-    success : function (data) {
-      var arraySeries = data['results'];
-      if (data['total_results'] >0) {
-        printSeries(arraySeries);
-      }else {
-        $('#containerMovies').html('<h1 class="error">NESSUN CONTENUTO TROVATO </h1>');
-      }
-
-
-    },
-    error : function (err) {
-      console.log(err,"error");
-    }
-
-  });
 }
 
 function printSeries(arraySeries) {

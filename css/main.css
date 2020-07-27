@@ -76,6 +76,8 @@ header h1{
 
 .container{
   position: relative;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .details{
