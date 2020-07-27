@@ -17,7 +17,6 @@ function findMovie() {
       },
       success : function (data) {
         var arrayMovie = data['results'];
-        console.log(arrayMovie);
         printMovie(arrayMovie);
       },
       error : function (err) {
@@ -34,13 +33,15 @@ function printMovie(arrayMovie) {
 
   for (var i = 0; i < arrayMovie.length; i++) {
     var movie = arrayMovie[i];
+    var vote = Math.round(movie['vote_average']/2);
+
     var movieHtml= compiled({
       'title':movie['title'],
       'original_title':movie['original_title'],
       'original_language':movie['original_language'],
-      'vote_average':movie['vote_average']
     });
     target.append(movieHtml);
+
   }
 }
 
