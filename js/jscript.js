@@ -82,9 +82,37 @@ function home() {
   });
 }
 
+function findActor() {
+
+  $(document).on('click','.details', function () {
+    var clicked = $(this);
+    var apiKey = 'dc2cea832b9cc2420fe1b945e738abdf';
+    var id=$(this).data('id');
+    console.log(id);
+    $.ajax({
+      url:'http://api.themoviedb.org/3/movie/'+id+'/credits',
+      method:'GET',
+      data:{
+        'api_key':apiKey,
+      },
+      success:function (data) {
+        var cast = [];
+        for (var i = 0; i < data['cast'].length; i++) {
+          cast.push(data['cast'][i]['name'])
+        }
+        clicked.text(cast)
+      },
+      error:function (err) {
+        console.log(err);
+      }
+    });
+  })
+}
+
 function init() {
   findMovie();
   home();
+  findActor();
 }
 
 $(document).ready(init);

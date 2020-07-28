@@ -10,12 +10,13 @@
     <script id="movie-template" type="text/x-handlebars-template">
       <li class="container">
         <img src="{{poster_path}}" alt="Poster img">
-        <div class="details">
+        <div data-id="{{id}}" class="details">
           <h1 class='title'>{{title}} {{name}}</h1>
           <h2 class="original_title">Original title: {{original_title}} {{original_name}}</h2>
           <span class="original_language"><div class='{{original_language}}'></div></span><br>
           <span class="vote_average">Voto: <i class="1 fas fa-star"></i><i class="2 fas fa-star"></i><i class="3 fas fa-star"></i><i class="4 fas fa-star"></i><i class="5 fas fa-star"></i></span>
           <p class="overview">{{overview}}</p>
+          <p> ---CLICK FOR MORE---</p>
         </div>
       </li>
     </script>
