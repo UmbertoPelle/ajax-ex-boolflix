@@ -4,7 +4,6 @@ function findMovie() {
     if (event.which == 13) {
       var apiKey = 'dc2cea832b9cc2420fe1b945e738abdf';
       var input = $('#serchInput');
-      $('#containerMovies').text('');
       var request = input.val();
 
       if (request) {
@@ -54,6 +53,7 @@ function findMovie() {
 }
 
 function printMovie(arrayMovie) {
+  $('#containerMovies').text('');
   $('#serchInput').val('');
   var template = $('#movie-template').html();
   var compiled = Handlebars.compile(template)
@@ -165,11 +165,55 @@ function genreMovieandSeries() {
   });
 }
 
+function getMovieandSeriesforGenre() {
+  var apiKey = 'dc2cea832b9cc2420fe1b945e738abdf';
+
+  $(document).on('click','.movieGenreList h4', function () {
+    var genreId = $(this).data('genre');
+    console.log(genreId)
+    $.ajax({
+      url:'https://api.themoviedb.org/3/discover/movie',
+      method:'GET',
+      data:{
+        'api_key':apiKey,
+        'with_genres':genreId
+      },
+      success:function (data) {
+        console.log(data['results']);
+        printMovie(data['results'])
+      },
+      error:function (err) {
+        console.log(err);
+      }
+    });
+  })
+  $(document).on('click','.seriesGenreList h4', function () {
+    var genreId = $(this).data('genre');
+    console.log(genreId)
+    $.ajax({
+      url:'https://api.themoviedb.org/3/discover/tv',
+      method:'GET',
+      data:{
+        'api_key':apiKey,
+        'with_genres':genreId
+      },
+      success:function (data) {
+        console.log(data['results']);
+        printMovie(data['results'])
+      },
+      error:function (err) {
+        console.log(err);
+      }
+    });
+  })
+}
+
 function init() {
   genreMovieandSeries();
   findMovie();
   home();
   findActorandGenre();
+  getMovieandSeriesforGenre();
 }
 
 $(document).ready(init);
