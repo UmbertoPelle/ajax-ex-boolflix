@@ -76,9 +76,10 @@ function printMovie(arrayMovie) {
 }
 
 function home() {
+  var home = $('#containerMovies').html()
   $('.logoBoolFlix').click(function () {
     $('#serch #serchInput').val('');
-    $('#containerMovies').text('');
+    $('#containerMovies').html(home);
   });
 }
 
