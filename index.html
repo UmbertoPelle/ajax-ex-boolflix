@@ -21,12 +21,20 @@
         </div>
       </li>
     </script>
+
+    <script id="genre-template" type="text/x-handlebars-template">
+      <h4 data-genre="{{id}}">{{name}}</h4>
+    </script>
   </head>
   <body>
 
     <header>
       <div class="logoBoolFlix">
         <h1>BOOLFLIX</h1>
+      </div>
+      <div class="movieGenre">
+        Movie Genre
+        <div class="movieGenreList"></div>
       </div>
       <div id="serch">
         <input id="serchInput" type="text" placeholder="Serch">
@@ -39,7 +47,7 @@
           <h1 class="error">WELCOME IN BOOLFLIX</h1>
           <p>Here you can find the review of thousands of films and tv series, have fun <i class="fas fa-film"></i> <i class="fas fa-video"></i></p>
         </li>
-        
+
 
         <li class="container">
           <img src="https://image.tmdb.org/t/p/w342/6NfLuSGpJiwjdYC7j5AxbAcV6Qf.jpg" alt="Poster img">

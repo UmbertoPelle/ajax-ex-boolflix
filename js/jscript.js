@@ -113,7 +113,36 @@ function findActorandGenre() {
   })
 }
 
+function genreMovie() {
+  var apiKey = 'dc2cea832b9cc2420fe1b945e738abdf';
+
+  $.ajax({
+    url:'https://api.themoviedb.org/3/genre/movie/list',
+    method:'GET',
+    data:{
+      'api_key':apiKey,
+    },
+    success:function (data) {
+      var template = $('#genre-template').html();
+      var compiled = Handlebars.compile(template)
+      var target = $('.movieGenreList');
+
+      for (var i = 0; i < data['genres'].length; i++) {
+        var genere = data['genres'][i];
+
+        var genreHTML = compiled(genere);
+        target.append(genreHTML);
+
+      }
+    },
+    error:function (error) {
+      console.log(error);
+    }
+  });
+}
+
 function init() {
+  genreMovie();
   findMovie();
   home();
   findActorandGenre();

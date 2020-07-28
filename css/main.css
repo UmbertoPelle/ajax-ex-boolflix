@@ -21,6 +21,35 @@ header h1{
   cursor: pointer;
 }
 
+.movieGenre{
+  background-color: #fff;
+  font-size: 18px;
+  padding: 6px;
+  cursor: pointer;
+  position: relative;
+}
+
+.movieGenre:hover .movieGenreList{
+  display: block;
+}
+
+.movieGenreList h4:hover{
+  text-decoration: underline;
+}
+
+.movieGenreList{
+  position: absolute;
+  width: 115px;
+  height: 250px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  top: 33px;
+  left: -3px;
+  background-color: #fff;
+  text-align:center;
+  display: none;
+}
+
 #containerMovies{
   margin-top: 55px;
   display: flex;
@@ -99,6 +128,10 @@ header h1{
   position: absolute;
   top: 0;
   color: #fff;
+}
+
+.details .more {
+  cursor: pointer;
 }
 
 .container:hover .details{
