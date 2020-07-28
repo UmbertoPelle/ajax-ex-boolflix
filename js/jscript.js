@@ -1,3 +1,4 @@
+// al click del tasto enter si avvia una ricerca del film/serie
 function findMovie() {
 
   $('#serchInput').keydown(function () {
@@ -52,6 +53,7 @@ function findMovie() {
   });
 }
 
+// viene stampato a schermo il risultato della ricerca film/serie/genere
 function printMovie(arrayMovie) {
   $('#containerMovies').text('');
   $('#serchInput').val('');
@@ -75,6 +77,7 @@ function printMovie(arrayMovie) {
   }
 }
 
+// al click della scritta BOOLFLIX si resetta il contenuto della main
 function home() {
   var home = $('#containerMovies').html()
   $('.logoBoolFlix').click(function () {
@@ -83,6 +86,7 @@ function home() {
   });
 }
 
+// vengono raccolti i dati riguardanti cast e generi tramite un api diversa
 function findActorandGenre() {
 
   $(document).on('click','.details', function () {
@@ -113,6 +117,7 @@ function findActorandGenre() {
   })
 }
 
+// vengono creati i due dropdown menu con le liste dei vari generi
 function genreMovieandSeries() {
   var apiKey = 'dc2cea832b9cc2420fe1b945e738abdf';
 
@@ -165,6 +170,7 @@ function genreMovieandSeries() {
   });
 }
 
+// vieni avviata una ricerca attraverso il genere selezionato
 function getMovieandSeriesforGenre() {
   var apiKey = 'dc2cea832b9cc2420fe1b945e738abdf';
 

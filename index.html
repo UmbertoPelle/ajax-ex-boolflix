@@ -9,6 +9,7 @@
     <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
     <link rel="stylesheet" href="./css/main.css">
     <link rel="icon" href="./img/icon.jpg">
+    <!-- template delle locandine dei film  -->
     <script id="movie-template" type="text/x-handlebars-template">
       <li class="container">
         <img src="{{poster_path}}" alt="Poster img">
@@ -22,11 +23,11 @@
         </div>
       </li>
     </script>
-
+    <!-- template lista generi film  -->
     <script id="genre-template" type="text/x-handlebars-template">
       <h4 data-genre="{{id}}">{{name}}</h4>
     </script>
-
+    <!-- template lista generi serie  -->
     <script id="series-template" type="text/x-handlebars-template">
       <h4 data-genre="{{id}}">{{name}}</h4>
     </script>
