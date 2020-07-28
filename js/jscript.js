@@ -103,7 +103,7 @@ function findActor() {
           cast.push(data['cast'][i]['name'])
         }
         clicked.children('.more').text('Cast: '+ cast);
-        clicked.append('genres: ', genre);
+        clicked.append('genres-id: ', genre);
       },
       error:function (err) {
         console.log(err);

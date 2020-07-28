@@ -83,7 +83,7 @@ header h1{
 .details{
   display: none;
   background-color: #000;
-  height: 100%;
+  min-height: 100%;
   width: 100%;
   position: absolute;
   top: 0;
