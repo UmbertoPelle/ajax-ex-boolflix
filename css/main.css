@@ -44,6 +44,8 @@ header h1{
 
 #containerMovies .welcome{
   border: 0;
+  width: 100%;
+  min-height: 150px;
 }
 
 .welcome p{
