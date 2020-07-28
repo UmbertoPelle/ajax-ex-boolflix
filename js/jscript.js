@@ -87,7 +87,9 @@ function findActor() {
   $(document).on('click','.details', function () {
     var clicked = $(this);
     var apiKey = 'dc2cea832b9cc2420fe1b945e738abdf';
-    var id=$(this).data('id');
+    var id=clicked.data('id');
+    var genre = clicked.data('genre');
+    console.log(genre);
     console.log(id);
     $.ajax({
       url:'http://api.themoviedb.org/3/movie/'+id+'/credits',
@@ -97,10 +99,11 @@ function findActor() {
       },
       success:function (data) {
         var cast = [];
-        for (var i = 0; i < data['cast'].length; i++) {
+        for (var i = 0; i < 5; i++) {
           cast.push(data['cast'][i]['name'])
         }
-        clicked.text(cast)
+        clicked.html('<h2>'+cast+'</h2>');
+        clicked.append('genres: ', genre);
       },
       error:function (err) {
         console.log(err);
