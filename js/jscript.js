@@ -53,30 +53,6 @@ function findMovie() {
   });
 }
 
-// viene stampato a schermo il risultato della ricerca film/serie/genere
-function printMovie(arrayMovie) {
-  $('#containerMovies').text('');
-  $('#serchInput').val('');
-  var template = $('#movie-template').html();
-  var compiled = Handlebars.compile(template)
-  var target = $('#containerMovies');
-  var poster = 'https://image.tmdb.org/t/p/w342';
-
-  for (var i = 0; i < arrayMovie.length; i++) {
-    var movie = arrayMovie[i];
-    var vote = Math.round(movie['vote_average']/2);
-    movie['poster_path']= poster + movie['poster_path'];
-
-    var movieHtml = compiled(movie);
-    target.append(movieHtml);
-
-    for (var x = 0; x <= vote; x++) {
-      var stars = $('.vote_average').children('.'+x).addClass('stars');
-    }
-
-  }
-}
-
 // al click della scritta BOOLFLIX si resetta il contenuto della main
 function home() {
   var home = $('#containerMovies').html()
@@ -126,6 +102,7 @@ function genreMovieandSeries() {
     method:'GET',
     data:{
       'api_key':apiKey,
+      'language': 'it-IT'
     },
     success:function (data) {
       var template = $('#genre-template').html();
@@ -150,6 +127,7 @@ function genreMovieandSeries() {
     method:'GET',
     data:{
       'api_key':apiKey,
+      'language': 'it-IT'
     },
     success:function (data) {
       var template = $('#series-template').html();
@@ -182,10 +160,10 @@ function getMovieandSeriesforGenre() {
       method:'GET',
       data:{
         'api_key':apiKey,
-        'with_genres':genreId
+        'with_genres':genreId,
+        'language': 'it-IT'
       },
       success:function (data) {
-        console.log(data['results']);
         printMovie(data['results'])
       },
       error:function (err) {
@@ -201,7 +179,8 @@ function getMovieandSeriesforGenre() {
       method:'GET',
       data:{
         'api_key':apiKey,
-        'with_genres':genreId
+        'with_genres':genreId,
+        'language': 'it-IT'
       },
       success:function (data) {
         console.log(data['results']);
@@ -212,6 +191,30 @@ function getMovieandSeriesforGenre() {
       }
     });
   })
+}
+
+// viene stampato a schermo il risultato della ricerca film/serie/genere
+function printMovie(arrayMovie) {
+  $('#containerMovies').text('');
+  $('#serchInput').val('');
+  var template = $('#movie-template').html();
+  var compiled = Handlebars.compile(template)
+  var target = $('#containerMovies');
+  var poster = 'https://image.tmdb.org/t/p/w342';
+
+  for (var i = 0; i < arrayMovie.length; i++) {
+    var movie = arrayMovie[i];
+    var vote = Math.round(movie['vote_average']/2);
+    movie['poster_path']= poster + movie['poster_path'];
+
+    var movieHtml = compiled(movie);
+    target.append(movieHtml);
+
+    for (var x = 0; x <= vote; x++) {
+      var stars = $('.vote_average').children('.'+x).addClass('stars');
+    }
+
+  }
 }
 
 function init() {
