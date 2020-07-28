@@ -32,7 +32,7 @@ function findMovie() {
                 success : function (data) {
                   var arraySeries = data['results'];
                   if (data['total_results'] >0) {
-                    printSeries(arraySeries);
+                    printMovie(arraySeries);
                   }else {
                     $('#containerMovies').html('<h1 class="error">NESSUN CONTENUTO TROVATO </h1>');
                   }
@@ -60,48 +60,18 @@ function printMovie(arrayMovie) {
   var target = $('#containerMovies');
   var poster = 'https://image.tmdb.org/t/p/w342';
 
-
   for (var i = 0; i < arrayMovie.length; i++) {
     var movie = arrayMovie[i];
     var vote = Math.round(movie['vote_average']/2);
+    movie['poster_path']= poster + movie['poster_path'];
 
-    var movieHtml= compiled({
-      'title':movie['title'],
-      'original_title':movie['original_title'],
-      'original_language':movie['original_language'],
-      'poster_path': poster + movie['poster_path'],
-      'overview':movie['overview']
-    });
+    var movieHtml = compiled(movie);
     target.append(movieHtml);
 
     for (var x = 0; x <= vote; x++) {
       var stars = $('.vote_average').children('.'+x).addClass('stars');
     }
 
-  }
-}
-
-function printSeries(arraySeries) {
-  $('#serchInput').val('');
-  var template = $('#movie-template').html();
-  var compiled = Handlebars.compile(template)
-  var target = $('#containerMovies');
-  var poster = 'https://image.tmdb.org/t/p/w342'
-
-  for (var i = 0; i < arraySeries.length; i++) {
-    var series = arraySeries[i];
-    var vote = Math.round(series['vote_average']/2);
-    var seriesHtml= compiled({
-      'title':series['name'],
-      'original_title':series['original_name'],
-      'original_language':series['original_language'],
-      'poster_path': poster + series['poster_path'],
-      'overview':series['overview']
-    });
-    target.append(seriesHtml);
-    for (var x = 0; x <= vote; x++) {
-      var stars = $('.vote_average').children('.'+x).addClass('stars');
-    }
   }
 }
 
