@@ -102,7 +102,7 @@ function findActor() {
         for (var i = 0; i < 5; i++) {
           cast.push(data['cast'][i]['name'])
         }
-        clicked.html('<h2>'+cast+'</h2>');
+        clicked.children('.more').text('Cast: '+ cast);
         clicked.append('genres: ', genre);
       },
       error:function (err) {
