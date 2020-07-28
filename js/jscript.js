@@ -82,7 +82,7 @@ function home() {
   });
 }
 
-function findActor() {
+function findActorandGenre() {
 
   $(document).on('click','.details', function () {
     var clicked = $(this);
@@ -115,7 +115,7 @@ function findActor() {
 function init() {
   findMovie();
   home();
-  findActor();
+  findActorandGenre();
 }
 
 $(document).ready(init);
