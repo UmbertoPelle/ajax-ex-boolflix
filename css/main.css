@@ -148,6 +148,10 @@ header h1{
   color: #fff;
 }
 
+.details h3{
+  color: #796a11;
+}
+
 .details .more {
   cursor: pointer;
 }

@@ -65,8 +65,8 @@ function home() {
 // vengono raccolti i dati riguardanti cast e generi tramite un api diversa
 function findActorandGenre() {
 
-  $(document).on('click','.details', function () {
-    var clicked = $(this);
+  $(document).on('click','.details .more', function () {
+    var clicked = $(this).parent('.details');
     var apiKey = 'dc2cea832b9cc2420fe1b945e738abdf';
     var id=clicked.data('id');
     var genre = clicked.data('genre');
@@ -83,7 +83,8 @@ function findActorandGenre() {
         for (var i = 0; i < 5; i++) {
           cast.push(data['cast'][i]['name'])
         }
-        clicked.children('.more').text('Cast: '+ cast);
+        clicked.children('.more').text('');
+        clicked.append('<h3>'+cast+'</h3>');
         clicked.append('genres-id: ', genre);
       },
       error:function (err) {
