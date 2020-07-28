@@ -21,7 +21,7 @@ header h1{
   cursor: pointer;
 }
 
-.movieGenre{
+.movieGenre,.seriesGenre{
   background-color: #fff;
   font-size: 18px;
   padding: 6px;
@@ -29,15 +29,15 @@ header h1{
   position: relative;
 }
 
-.movieGenre:hover .movieGenreList{
+.movieGenre:hover .movieGenreList,.seriesGenre:hover .seriesGenreList{
   display: block;
 }
 
-.movieGenreList h4:hover{
+.movieGenreList h4:hover , .seriesGenreList h4:hover{
   text-decoration: underline;
 }
 
-.movieGenreList{
+.movieGenreList,.seriesGenreList{
   position: absolute;
   width: 115px;
   height: 250px;

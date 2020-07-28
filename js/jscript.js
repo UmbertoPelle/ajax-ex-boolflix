@@ -113,7 +113,7 @@ function findActorandGenre() {
   })
 }
 
-function genreMovie() {
+function genreMovieandSeries() {
   var apiKey = 'dc2cea832b9cc2420fe1b945e738abdf';
 
   $.ajax({
@@ -139,10 +139,34 @@ function genreMovie() {
       console.log(error);
     }
   });
+
+  $.ajax({
+    url:'https://api.themoviedb.org/3/genre/tv/list',
+    method:'GET',
+    data:{
+      'api_key':apiKey,
+    },
+    success:function (data) {
+      var template = $('#series-template').html();
+      var compiled = Handlebars.compile(template)
+      var target = $('.seriesGenreList');
+
+      for (var i = 0; i < data['genres'].length; i++) {
+        var genere = data['genres'][i];
+
+        var genreHTML = compiled(genere);
+        target.append(genreHTML);
+
+      }
+    },
+    error:function (error) {
+      console.log(error);
+    }
+  });
 }
 
 function init() {
-  genreMovie();
+  genreMovieandSeries();
   findMovie();
   home();
   findActorandGenre();
