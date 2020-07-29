@@ -93,6 +93,10 @@ header h1{
   min-height: 150px;
 }
 
+#containerMovies .overview{
+  margin: 10px 0;
+}
+
 .welcome p{
   color: #fff;
   font-size: 20px;
