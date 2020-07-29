@@ -1,8 +1,11 @@
 // al click del tasto enter si avvia una ricerca del film/serie
-function findMovie() {
+function findMovieSerie() {
 
   $('#serchInput').keydown(function () {
+
     if (event.which == 13) {
+      var empty=0;
+      $('#containerMovies').text('');
       var apiKey = 'dc2cea832b9cc2420fe1b945e738abdf';
       var input = $('#serchInput');
       var request = input.val();
@@ -21,27 +24,7 @@ function findMovie() {
             if (data['total_results'] >0) {
               printMovie(arrayMovie);
             }else {
-              $.ajax({
-                url:'https://api.themoviedb.org/3/search/tv',
-                method:'GET',
-                data:{
-                  'api_key':apiKey,
-                  'query':request,
-                  'language': 'it-IT'
-                },
-                success : function (data) {
-                  var arraySeries = data['results'];
-                  if (data['total_results'] >0) {
-                    printMovie(arraySeries);
-                  }else {
-                    $('#containerMovies').html('<h1 class="error">NESSUN CONTENUTO TROVATO </h1>');
-                  }
-                },
-                error : function (err) {
-                  console.log(err,"error");
-                }
-
-              });
+              empty++;
             }
           },
           error : function (err) {
@@ -49,6 +32,30 @@ function findMovie() {
           }
         });
       }
+      $.ajax({
+        url:'https://api.themoviedb.org/3/search/tv',
+        method:'GET',
+        data:{
+          'api_key':apiKey,
+          'query':request,
+          'language': 'it-IT'
+        },
+        success : function (data) {
+          var arraySeries = data['results'];
+          if (data['total_results'] >0) {
+            printMovie(arraySeries);
+          }else {
+            empty++;
+            if (empty==2) {
+              $('#containerMovies').html('<h1 class="error">NESSUN CONTENUTO TROVATO </h1>');
+            }
+          }
+        },
+        error : function (err) {
+          console.log(err,"error");
+        }
+
+      });
     }
   });
 }
@@ -165,6 +172,7 @@ function getMovieandSeriesforGenre() {
         'language': 'it-IT'
       },
       success:function (data) {
+        $('#containerMovies').text('');
         printMovie(data['results'])
       },
       error:function (err) {
@@ -184,7 +192,7 @@ function getMovieandSeriesforGenre() {
         'language': 'it-IT'
       },
       success:function (data) {
-        console.log(data['results']);
+        $('#containerMovies').text('');
         printMovie(data['results'])
       },
       error:function (err) {
@@ -196,7 +204,6 @@ function getMovieandSeriesforGenre() {
 
 // viene stampato a schermo il risultato della ricerca film/serie/genere
 function printMovie(arrayMovie) {
-  $('#containerMovies').text('');
   $('#serchInput').val('');
   var template = $('#movie-template').html();
   var compiled = Handlebars.compile(template)
@@ -205,13 +212,13 @@ function printMovie(arrayMovie) {
 
   for (var i = 0; i < arrayMovie.length; i++) {
     var movie = arrayMovie[i];
-    var vote = Math.round(movie['vote_average']/2);
+    var vote = Math.ceil(movie['vote_average']/2);
     movie['poster_path']= poster + movie['poster_path'];
 
     var movieHtml = compiled(movie);
     target.append(movieHtml);
 
-    for (var x = 0; x <= vote; x++) {
+    for (var x = 1; x <= vote; x++) {
       var stars = $('.vote_average').children('.'+x).addClass('stars');
     }
 
@@ -220,7 +227,7 @@ function printMovie(arrayMovie) {
 
 function init() {
   genreMovieandSeries();
-  findMovie();
+  findMovieSerie();
   home();
   findActorandGenre();
   getMovieandSeriesforGenre();
