@@ -106,13 +106,6 @@ header h1{
   color:yellow;
 }
 
-/* bandiere lingue */
-
-#containerMovies li .flag{
-  width: 50px;
-  height: 50px;
-}
-
 /* gestione template locandine */
 .container{
   position: relative;
@@ -140,4 +133,11 @@ header h1{
 
 .container:hover .details{
   display: block;
+}
+
+/* bandiere lingue */
+
+#containerMovies li .flag{
+  width: 50px;
+  height: 50px;
 }
