@@ -76,9 +76,26 @@ function findActorandGenre() {
     var clicked = $(this).parent('.details');
     var apiKey = 'dc2cea832b9cc2420fe1b945e738abdf';
     var id=clicked.data('id');
-    var genre = clicked.data('genre');
-    console.log(genre);
-    console.log(id);
+    var genre = [];
+
+    // prendo la lista dei generi id-nome e salvo solo i nomi
+    $.ajax({
+      url:'http://api.themoviedb.org/3/movie/'+id+'?api_key=dc2cea832b9cc2420fe1b945e738abdf',
+      method:'GET',
+      data:{
+        'api_key':apiKey,
+      },
+      success:function (data) {
+        for (var i = 0; i < data['genres'].length; i++) {
+          genre.push(data['genres'][i]['name']+', ')
+        }
+      },
+      error:function (error) {
+        console.log(error);
+      }
+    });
+
+    // stampo cast e generi
     $.ajax({
       url:'http://api.themoviedb.org/3/movie/'+id+'/credits',
       method:'GET',
@@ -88,11 +105,11 @@ function findActorandGenre() {
       success:function (data) {
         var cast = [];
         for (var i = 0; i < 5; i++) {
-          cast.push(data['cast'][i]['name'])
+          cast.push(data['cast'][i]['name']);
         }
         clicked.children('.more').text('');
         clicked.append('<h3>'+cast+'</h3>');
-        clicked.append('genres-id: ', genre);
+        clicked.append('genres: ', genre);
       },
       error:function (err) {
         console.log(err);
