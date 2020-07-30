@@ -137,7 +137,7 @@ function findActorandGenre() {
             cast.push(data['cast'][i]['name']);
           }
           clicked.children('.more').text('');
-          clicked.append('<h3>'+cast+'</h3>');
+          clicked.append('<h3>Actores: '+cast+'</h3>');
           clicked.append('genres: ', genre);
         } else {
           clicked.children('.more').text('Nessun dato trovato');
