@@ -1,10 +1,9 @@
 // al click del tasto enter si avvia una ricerca del film/serie
 function findMovieSerie() {
-
   $('#serchInput').keydown(function () {
 
     if (event.which == 13) {
-      var empty = 0;
+      var empty=0;
       var apiKey = 'dc2cea832b9cc2420fe1b945e738abdf';
       var input = $('#serchInput');
       var request = input.val();
