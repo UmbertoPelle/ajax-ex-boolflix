@@ -213,7 +213,8 @@ function getMovieandSeriesforGenre() {
 
   $(document).on('click','.movieGenreList h4', function () {
     var genreId = $(this).data('genre');
-    console.log(genreId)
+    var genreName = $(this).text();
+    console.log(genreId,genreName);
     $.ajax({
       url:'https://api.themoviedb.org/3/discover/movie',
       method:'GET',
@@ -224,6 +225,7 @@ function getMovieandSeriesforGenre() {
       },
       success:function (data) {
         $('#containerMovies').text('');
+        $('#containerMovies').html('<h1 class="title">'+genreName+'</h1>');
         var arrayMovie = data['results'];
         for (var i = 0; i < arrayMovie.length; i++) {
           arrayMovie[i].type = 'film';
@@ -237,6 +239,8 @@ function getMovieandSeriesforGenre() {
   })
   $(document).on('click','.seriesGenreList h4', function () {
     var genreId = $(this).data('genre');
+    var genreName = $(this).text();
+
     console.log(genreId)
     $.ajax({
       url:'https://api.themoviedb.org/3/discover/tv',
@@ -248,6 +252,7 @@ function getMovieandSeriesforGenre() {
       },
       success:function (data) {
         $('#containerMovies').text('');
+        $('#containerMovies').html('<h1 class="title">'+genreName+'</h1>');
         var arraySeries = data['results'];
         for (var i = 0; i < arraySeries.length; i++) {
           arraySeries[i].type = 'series';

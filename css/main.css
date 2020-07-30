@@ -97,6 +97,12 @@ header h1{
   margin: 10px 0;
 }
 
+.title{
+  width: 100%;
+  text-align:center;
+  color: #fff;
+}
+
 .welcome p{
   color: #fff;
   font-size: 20px;
