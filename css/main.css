@@ -121,6 +121,7 @@ header h1{
   position: absolute;
   top: 0;
   color: #fff;
+  padding-bottom: 10px;
 }
 
 .details h3{

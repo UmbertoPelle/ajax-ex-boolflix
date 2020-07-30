@@ -13,7 +13,7 @@
     <script id="movie-template" type="text/x-handlebars-template">
       <li class="container">
         <img src="{{poster_path}}" alt="!Poster img error! Name: {{title}} {{name}}">
-        <div data-id="{{id}}" class="details">
+        <div data-id="{{id}}" data-type="{{type}}" class="details">
           <h1 class='title'>{{title}} {{name}}</h1>
           <h2 class="original_title">Original title: {{original_title}} {{original_name}}</h2>
           <img class="flag" src="img/{{original_language}}.jpg" alt="language: {{original_language}}"><br>

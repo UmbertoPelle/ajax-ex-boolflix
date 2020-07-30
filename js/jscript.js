@@ -21,6 +21,9 @@ function findMovieSerie() {
           success : function (data) {
             var arrayMovie = data['results'];
             if (data['total_results'] >0) {
+              for (var i = 0; i < arrayMovie.length; i++) {
+                arrayMovie[i].type = 'film';
+              }
               printMovie(arrayMovie);
             }else {
               empty++;
@@ -41,6 +44,9 @@ function findMovieSerie() {
           success : function (data) {
             var arraySeries = data['results'];
             if (data['total_results'] >0) {
+              for (var i = 0; i < arraySeries.length; i++) {
+                arraySeries[i].type = 'series';
+              }
               printMovie(arraySeries);
             }else {
               empty++;
@@ -76,24 +82,46 @@ function findActorandGenre() {
     var clicked = $(this).parent('.details');
     var apiKey = 'dc2cea832b9cc2420fe1b945e738abdf';
     var id=clicked.data('id');
+    var type = clicked.data('type');
     var genre = [];
 
     // prendo la lista dei generi id-nome e salvo solo i nomi
-    $.ajax({
-      url:'http://api.themoviedb.org/3/movie/'+id+'?api_key=dc2cea832b9cc2420fe1b945e738abdf',
-      method:'GET',
-      data:{
-        'api_key':apiKey,
-      },
-      success:function (data) {
-        for (var i = 0; i < data['genres'].length; i++) {
-          genre.push(data['genres'][i]['name']+', ')
+    // controllo se la ricerca riguarda film o serie
+    if (type =='film') {
+      $.ajax({
+        url:'http://api.themoviedb.org/3/movie/'+id,
+        method:'GET',
+        data:{
+          'api_key':apiKey,
+        },
+        success:function (data) {
+          for (var i = 0; i < data['genres'].length; i++) {
+            genre.push(data['genres'][i]['name']+', ')
+          }
+          console.log('film');
+        },
+        error:function (error) {
+          console.log(error);
         }
-      },
-      error:function (error) {
-        console.log(error);
-      }
-    });
+      });
+    } else {
+      $.ajax({
+        url:'http://api.themoviedb.org/3/tv/'+id,
+        method:'GET',
+        data:{
+          'api_key':apiKey,
+        },
+        success:function (data) {
+          for (var i = 0; i < data['genres'].length; i++) {
+            genre.push(data['genres'][i]['name']+', ')
+          }
+          console.log('series');
+        },
+        error:function (error) {
+          console.log(error);
+        }
+      });
+    }
 
     // stampo cast e generi
     $.ajax({
@@ -104,15 +132,21 @@ function findActorandGenre() {
       },
       success:function (data) {
         var cast = [];
-        for (var i = 0; i < 5; i++) {
-          cast.push(data['cast'][i]['name']);
+        if (data['cast'].length>0) {
+          for (var i = 0; i < 5; i++) {
+            cast.push(data['cast'][i]['name']);
+          }
+          clicked.children('.more').text('');
+          clicked.append('<h3>'+cast+'</h3>');
+          clicked.append('genres: ', genre);
+        } else {
+          clicked.children('.more').text('Nessun dato trovato');
         }
-        clicked.children('.more').text('');
-        clicked.append('<h3>'+cast+'</h3>');
-        clicked.append('genres: ', genre);
+
       },
       error:function (err) {
         console.log(err);
+        clicked.children('.more').text('Nessun dato trovato');
       }
     });
   })
@@ -190,7 +224,11 @@ function getMovieandSeriesforGenre() {
       },
       success:function (data) {
         $('#containerMovies').text('');
-        printMovie(data['results'])
+        var arrayMovie = data['results'];
+        for (var i = 0; i < arrayMovie.length; i++) {
+          arrayMovie[i].type = 'film';
+        }
+        printMovie(arrayMovie);
       },
       error:function (err) {
         console.log(err);
@@ -210,7 +248,11 @@ function getMovieandSeriesforGenre() {
       },
       success:function (data) {
         $('#containerMovies').text('');
-        printMovie(data['results'])
+        var arraySeries = data['results'];
+        for (var i = 0; i < arraySeries.length; i++) {
+          arraySeries[i].type = 'series';
+        }
+        printMovie(arraySeries);
       },
       error:function (err) {
         console.log(err);
