@@ -85,14 +85,14 @@ function findActorandGenre() {
     var type = clicked.data('type');
     var genre = [];
 
-    // prendo la lista dei generi id-nome e salvo solo i nomi
     // controllo se la ricerca riguarda film o serie
+    // prendo la lista dei generi del film clicked (id-nome) e salvo solo i nomi
     if (type =='film') {
       $.ajax({
         url:'http://api.themoviedb.org/3/movie/'+id,
         method:'GET',
         data:{
-          'api_key':apiKey,
+          'api_key':apiKey
         },
         success:function (data) {
           for (var i = 0; i < data['genres'].length; i++) {
